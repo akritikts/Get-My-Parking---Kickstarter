@@ -2,12 +2,16 @@ package silive.in.kiskstarter.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> backer_pro = new ArrayList<>();
     ArrayList<String> pleadage_pro = new ArrayList<>();
     ArrayList<String> days_pro = new ArrayList<>();
+    ArrayList<String> fund_pro = new ArrayList<>();
+    ArrayList<String> loc_pro = new ArrayList<>();
+    ArrayList<String> by_pro = new ArrayList<>();
+    Bundle detail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,23 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         main_backdrop = (EditText)findViewById(R.id.main_backdrop);
         list_pro = (ListView)findViewById(R.id.list_pro);
+        list_pro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(context,"Item click : "+position,Toast.LENGTH_SHORT).show();
+                detail = new Bundle();
+                detail.putString("Name",name_pro.get(position));
+                detail.putString("Backer",backer_pro.get(position));
+                detail.putString("Plead",pleadage_pro.get(position));
+                detail.putString("Days",days_pro.get(position));
+                detail.putString("Loc",loc_pro.get(position));
+                detail.putString("Fund",fund_pro.get(position));
+                detail.putString("By",by_pro.get(position));
+                Intent intent = new Intent(context,DetailsActivity.class);
+                intent.putExtra("DETAILS",detail);
+                startActivity(intent);
+            }
+        });
         new KickStart(this).execute();
     }
     public class KickStart extends AsyncTask<Void, Void, String> {
@@ -113,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
                     pleadage_pro.add(k_list.getString("amt.pledged"));
                     backer_pro.add(k_list.getString("num.backers"));
                     days_pro.add(k_list.getString("by"));
+                    fund_pro.add(k_list.getString("percentage.funded"));
+                    loc_pro.add(k_list.getString("location"));
+                    by_pro.add(k_list.getString("by"));
 
                     Log.d("TAG", "Item added");
 

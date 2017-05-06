@@ -1,9 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="silive.in.kiskstarter.activities.SplashScreen">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="35dp"
+        android:gravity="center"
+        android:text="KickStarter"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="35sp" />
+</RelativeLayout>

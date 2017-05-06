@@ -7,10 +7,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -47,6 +50,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
         main_backdrop = (EditText)findViewById(R.id.main_backdrop);
+        main_backdrop.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || event.getAction() == KeyEvent.ACTION_DOWN
+                        && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    String sre = main_backdrop.getText().toString();
+                    int len = sre.length();
+                    int flag = 0;
+                    for(int i = 0;i<name_pro.size();i++){
+                        if(name_pro.get(i).contains(sre)){
+                            flag = 1;
+                            detail = new Bundle();
+                            detail.putString("Name",name_pro.get(i));
+                            detail.putString("Backer",backer_pro.get(i));
+                            detail.putString("Plead",pleadage_pro.get(i));
+                            detail.putString("Days",days_pro.get(i));
+                            detail.putString("Loc",loc_pro.get(i));
+                            detail.putString("Fund",fund_pro.get(i));
+                            detail.putString("By",by_pro.get(i));
+                            Intent intent = new Intent(context,DetailsActivity.class);
+                            intent.putExtra("DETAILS",detail);
+                            startActivity(intent);
+                            break;
+                        }
+                        if(flag==0){
+                            Toast.makeText(context,"No match found!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
         list_pro = (ListView)findViewById(R.id.list_pro);
         list_pro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

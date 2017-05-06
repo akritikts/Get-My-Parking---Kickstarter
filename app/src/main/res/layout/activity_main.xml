@@ -29,7 +29,7 @@
             >
 
                 <EditText
-                    android:id="@+id/main.backdrop"
+                    android:id="@+id/main_backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="12sp"
@@ -67,7 +67,7 @@
             android:textSize="20sp"
             android:dividerHeight="2dp"
             android:padding="5dp"
-            />
+            android:id="@+id/list_pro"/>
     </android.support.v4.widget.NestedScrollView>
 
     <!--<android.support.design.widget.FloatingActionButton

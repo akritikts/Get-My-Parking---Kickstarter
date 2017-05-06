@@ -59,10 +59,10 @@ public class ProjectListAdapter extends BaseAdapter {
         holder.pleadage = (TextView) convertView.findViewById(R.id.pleadage);
         holder.no_of_days = (TextView) convertView.findViewById(R.id.no_of_days);
         holder.project_name.setText(name_of_project.get(position));
-        holder.backers.setText(backers_of_project.get(position));
-        holder.no_of_days.setText(days_to_go.get(position));
-        holder.pleadage.setText(pleadage_project.get(position));
+        holder.backers.setText("Backers : "+backers_of_project.get(position));
+        holder.no_of_days.setText("By : "+days_to_go.get(position));
+        holder.pleadage.setText("Pleadge : "+pleadage_project.get(position));
 
-        return null;
+        return convertView;
     }
 }

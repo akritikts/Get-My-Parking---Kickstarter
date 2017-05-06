@@ -74,10 +74,12 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(context,DetailsActivity.class);
                             intent.putExtra("DETAILS",detail);
                             startActivity(intent);
+                            main_backdrop.setText("");
                             break;
                         }
                         if(flag==0){
                             Toast.makeText(context,"No match found!",Toast.LENGTH_SHORT).show();
+                            main_backdrop.setText("");
                         }
                     }
                     return true;
